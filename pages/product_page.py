@@ -34,4 +34,13 @@ class ProductPage(BasePage):
             f'Цена добавленной книги не соответствует: {price_book} != {check_price_book}'
         )
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Сообщение об успехе отображается, но не должно"
+
+    def should_is_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Сообщение об успехе отображается, но не должно"
+
+
 
