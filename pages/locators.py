@@ -17,3 +17,8 @@ class ProductPageLocators():
     PRICE_BOOK = (By.CSS_SELECTOR, '[class = "col-sm-6 product_main"] p:nth-of-type(1)')
     CHECK_PRICE_BOOK = (By.CSS_SELECTOR, '#messages .alert-info p strong')
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, '#messages .alert-success:nth-of-type(1)')
+
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
