@@ -15,7 +15,7 @@ class LoginPageLocators():
 
 
 class ProductPageLocators():
-    ADD_TO_CART = (By.CSS_SELECTOR, '[value="Добавить в корзину"]')
+    ADD_TO_CART = (By.CSS_SELECTOR, '#id_quantity+button')
     NAME_BOOK = (By.CSS_SELECTOR, '[class = "col-sm-6 product_main"] h1')
     CHECK_NAME_BOOK = (By.CSS_SELECTOR, '#messages .alert-success:nth-of-type(1) strong')
     PRICE_BOOK = (By.CSS_SELECTOR, '[class = "col-sm-6 product_main"] p:nth-of-type(1)')

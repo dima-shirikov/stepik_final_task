@@ -1,7 +1,7 @@
-from pages.base_page import BasePage
+from .base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.locators import ProductPageLocators
+from .locators import ProductPageLocators
 
 
 class ProductPage(BasePage):
@@ -16,7 +16,7 @@ class ProductPage(BasePage):
         name_book = self.browser.find_element(*ProductPageLocators.NAME_BOOK).text
 
         check_name_book = WebDriverWait(self.browser, 10).until(
-            EC.visibility_of_element_located(ProductPageLocators.CHECK_NAME_BOOK)  # Используем visibility
+            EC.visibility_of_element_located(ProductPageLocators.CHECK_NAME_BOOK)
         ).text
 
         assert name_book == check_name_book, (
@@ -27,7 +27,7 @@ class ProductPage(BasePage):
         price_book = self.browser.find_element(*ProductPageLocators.PRICE_BOOK).text
 
         check_price_book = WebDriverWait(self.browser, 10).until(
-            EC.visibility_of_element_located(ProductPageLocators.CHECK_PRICE_BOOK)  # Используем visibility
+            EC.visibility_of_element_located(ProductPageLocators.CHECK_PRICE_BOOK)
         ).text
 
         assert price_book == check_price_book, (
@@ -41,6 +41,3 @@ class ProductPage(BasePage):
     def should_is_disappeared_success_message(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Сообщение об успехе отображается, но не должно"
-
-
-

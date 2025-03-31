@@ -1,7 +1,5 @@
-from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
-from pages.locators import LoginPageLocators
-from pages.locators import BasePageLocators
+from .base_page import BasePage
+from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
@@ -26,6 +24,3 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.PASSWORD_REGISTRY).send_keys(password)
         self.browser.find_element(*LoginPageLocators.PASSWORD_VALID_REGISTRY).send_keys(password)
         self.browser.find_element(*LoginPageLocators.BUTTON_REGISTRY).click()
-
-
-
