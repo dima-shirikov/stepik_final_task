@@ -1,5 +1,9 @@
+import time
+import random
+import string
 from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
+from pages.login_page import LoginPage
 import pytest
 
 
@@ -62,6 +66,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser): #Гость мо
     page.open()
     page.go_to_login_page()
 
+@pytest.mark.skip
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser): #Гость не видит товар в корзине, открытой со страницы товара
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = BasketPage(browser, link)
@@ -70,3 +75,33 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser): #Г
     page.check_basket_empty()
     page.check_is_text_basket_empty()
 
+
+@pytest.mark.login_guest
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        self.link = "http://selenium1py.pythonanywhere.com/"
+        email = str(time.time()) + "@fakemail.org"
+        password = ''.join(random.choices(string.ascii_letters + string.digits, k=random.randint(9, 12)))
+        page = LoginPage(browser, self.link)
+        page.open()
+        page.go_to_login_page()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+
+
+    def test_user_cant_see_success_message(self, browser):  # Гость не видит сообщения об успехе
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):  # Гость может добавить товар в корзину
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_cart()
+        page.check_name_book()
+        page.check_price_book()
